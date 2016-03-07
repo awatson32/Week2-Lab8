@@ -6,12 +6,11 @@ var Die = function() {
         this.div.className = 'die';
         this.roll();
         document.getElementById('dice-container').appendChild(this.div);
+        // this.div.addeEventListener('dblclick', removeDie);
         this.div.addEventListener('click', rollDice);
+        
     }
-    
-    
-       
-    
+        
     this.roll = function () {
         var num = Math.floor(Math.random() * 6) + 1;
         this.value = num;
@@ -35,11 +34,15 @@ function rollDice() {
     for (var i = 0; i < loadedDie.length; i++) {
         loadedDie[i].roll();    
     }   
-    
 }
 
-// Extra credit
+function removeDie() {
+   document.getElementById('dice-container').remove(this.div);
+}
 
+function sumDice() {
+    alert("Congrats! This is where the sum goes!");
+}
 
 
 
