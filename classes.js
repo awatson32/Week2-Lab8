@@ -6,8 +6,10 @@ var Die = function() {
         this.div.className = 'die';
         this.roll();
         document.getElementById('dice-container').appendChild(this.div);
-        // this.div.addeEventListener('dblclick', removeDie);
-        this.div.addEventListener('click', rollDice);
+        
+        //extra credit
+        this.div.addEventListener('click', this.roll.bind(this));
+        this.div.addeEventListener('dblclick', this.remove.bind(this));
         
     }
         
@@ -17,8 +19,13 @@ var Die = function() {
         this.div.innerHTML = num;
     }   
     
-    this.sum = function() {
-        
+   //extra credit 
+    Die.prototype.remove = function() {
+        var index = dice.indexOf(this);
+        if (index !== -1) {
+            dice.splice(index, 1);
+            this.div.remove();
+        }
     }
             
  }
@@ -40,8 +47,13 @@ function removeDie() {
    document.getElementById('dice-container').remove(this.div);
 }
 
+
 function sumDice() {
-    alert("Congrats! This is where the sum goes!");
+    var sum = 0;
+    for (var i = 0; i < dice.length; i++) {
+        sum += dice[i].value;
+    }
+    alert("The sum is " + sum);
 }
 
 
